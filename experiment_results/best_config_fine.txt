@@ -1,0 +1,15 @@
+Optimal configuration of the fine stage
+====================
+best Val RMSE：0.8813
+Optimization completion time：2026-02-24 11:18:36
+====================
+modals: ['text', 'video']
+lr: 0.00023999999999999998
+node_stalk_dim: 192
+fusion_type: concat
+batch_size: 256
+edge_stalk_dim: 32
+num_diffusion_layers: 1
+weight_decay: 1e-05
+dropout_rate: 0.1
+epochs: 30

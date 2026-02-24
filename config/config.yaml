@@ -1,0 +1,25 @@
+
+data:
+  data_path: "/home/li/datasets/multimodal_rec/ml-1m"
+  feat_path: "/home/li/datasets/multimodal_rec/ml-1m-multimodal/features"
+  modals: ["text", "video"]
+  modal_in_dims:
+    text: 768
+    video: 2048
+  sample_frac: 1  # 核心：调优时用20%数据，提速80%
+
+train:
+  device: "cuda:0"
+  seed: 42
+  lr: 0.0003
+  batch_size: 256
+  epochs: 30
+  weight_decay: 1e-05
+  dropout_rate: 0.1
+
+model:
+  node_stalk_dim: 256
+  edge_stalk_dim: 32
+  num_diffusion_layers: 1
+  fusion_type: "concat"
+

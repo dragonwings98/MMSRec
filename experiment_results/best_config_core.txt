@@ -1,0 +1,15 @@
+Optimal configuration of the core stage
+====================
+best Val RMSE：0.8849
+Optimization completion time：2026-02-24 11:06:18
+====================
+modals: ['text', 'video']
+lr: 0.0003
+node_stalk_dim: 256
+fusion_type: concat
+batch_size: 256
+edge_stalk_dim: 64
+num_diffusion_layers: 2
+weight_decay: 0.0001
+dropout_rate: 0.1
+epochs: 30

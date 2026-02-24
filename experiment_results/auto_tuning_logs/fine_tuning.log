@@ -1,0 +1,36 @@
+nohup: 忽略输入
+===== Loading Data (fine Layer Tuning) =====
+📌 采样20.0%数据用于调优（提速）
+📌 过滤后保留用户数：1208（原用户数：1208）
+📌 过滤后评分样本数：191991
+✅ 加载text特征（图束适配）：原始维度 torch.Size([3883, 768])
+✅ 对齐text特征：最终维度 torch.Size([3438, 768])（电影数：3438，维度：768）
+✅ 加载video特征（图束适配）：原始维度 torch.Size([3883, 2048])
+✅ 对齐video特征：最终维度 torch.Size([3438, 2048])（电影数：3438，维度：2048）
+
+===== 数据集划分 =====
+训练集样本数：153592 (80.0%)
+验证集样本数：19199 (10.0%)
+测试集样本数：19200 (10.0%)
+当前加载的模态：['text', 'video']
+Current optimization stage:fine
+Search space:dict_keys(['modals', 'lr', 'node_stalk_dim', 'fusion_type', 'batch_size', 'edge_stalk_dim', 'num_diffusion_layers', 'weight_decay', 'dropout_rate', 'epochs'])
+Number of configurations generated:9
+fine stage tuning:   0%|          | 0/9 [00:00<?, ?it/s]                                                        fine stage tuning:   0%|          | 0/9 [00:07<?, ?it/s]fine stage tuning:  11%|█         | 1/9 [00:07<01:03,  7.95s/it]                                                                fine stage tuning:  11%|█         | 1/9 [00:17<01:03,  7.95s/it]fine stage tuning:  22%|██▏       | 2/9 [00:17<01:01,  8.84s/it]                                                                fine stage tuning:  22%|██▏       | 2/9 [00:32<01:01,  8.84s/it]fine stage tuning:  33%|███▎      | 3/9 [00:32<01:09, 11.61s/it]                                                                fine stage tuning:  33%|███▎      | 3/9 [00:45<01:09, 11.61s/it]fine stage tuning:  44%|████▍     | 4/9 [00:45<01:00, 12.04s/it]                                                                fine stage tuning:  44%|████▍     | 4/9 [00:58<01:00, 12.04s/it]fine stage tuning:  56%|█████▌    | 5/9 [00:58<00:50, 12.66s/it]                                                                fine stage tuning:  56%|█████▌    | 5/9 [01:17<00:50, 12.66s/it]fine stage tuning:  67%|██████▋   | 6/9 [01:17<00:44, 14.79s/it]                                                                fine stage tuning:  67%|██████▋   | 6/9 [01:23<00:44, 14.79s/it]fine stage tuning:  78%|███████▊  | 7/9 [01:23<00:23, 11.97s/it]                                                                fine stage tuning:  78%|███████▊  | 7/9 [01:38<00:23, 11.97s/it]fine stage tuning:  89%|████████▉ | 8/9 [01:38<00:12, 12.76s/it]                                                                fine stage tuning:  89%|████████▉ | 8/9 [01:51<00:12, 12.76s/it]fine stage tuning: 100%|██████████| 9/9 [01:51<00:00, 12.85s/it]fine stage tuning: 100%|██████████| 9/9 [01:51<00:00, 12.37s/it]
+config0 | Val RMSE: 0.9035 | best: 0.9035 | time: 0.13min
+config1 | Val RMSE: 0.8971 | best: 0.8971 | time: 0.16min
+config2 | Val RMSE: 0.8813 | best: 0.8813 | time: 0.25min
+config3 | Val RMSE: 0.8837 | best: 0.8813 | time: 0.21min
+config4 | Val RMSE: 0.8818 | best: 0.8813 | time: 0.23min
+config5 | Val RMSE: 0.8824 | best: 0.8813 | time: 0.32min
+config6 | Val RMSE: 0.9024 | best: 0.8813 | time: 0.10min
+config7 | Val RMSE: 0.8841 | best: 0.8813 | time: 0.24min
+config8 | Val RMSE: 0.8864 | best: 0.8813 | time: 0.22min
+✅ The hyperparameter influence analysis diagram has been saved:experiment_results/hyperparam_impact_fine.png
+
+===== fine optimization completed =====
+📊 full result：experiment_results/tuning_fine_full.csv
+✅ success result：experiment_results/tuning_fine_success.csv
+🏆 best config：experiment_results/best_config_fine.txt
+🎯 best Val RMSE：0.8813
+====================================
