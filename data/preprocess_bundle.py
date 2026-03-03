@@ -7,52 +7,51 @@ from sklearn.model_selection import train_test_split
 
 def load_graph_bundle_data(config):
     """
-    适配图束理论的数据加载 + 训练/验证/测试集划分（8:1:1）
-    核心修复：
-    1. 过滤只有1条评分的用户，解决stratify分层采样报错
-    2. 支持小数据量采样（调优提速）
-    3. 仅加载config中指定的模态特征（兼容单/多模态）
+    Data loading adapted to graph bundle theory + training/validation/test set partitioning (8:1:1)
+    1. Filter users with only one rating, resolving stratified sampling errors.
+    2. Support for small data volume sampling (optimized for speed).
+    3. Load only modal features specified in the config (compatible with single/multimodal features).
     """
-    # 1. 路径解析
+    # 1. Path resolution
     data_path = config["data_path"]
     feat_path = config["feat_path"]
-    modals = config["modals"]  # 当前配置指定的模态：["text"]/["video"]/["text","video"]
-    modal_in_dims = config["modal_in_dims"]  # 模态输入维度：{"text":768, "video":2048}
+    modals = config["modals"]  # The current configuration specifies the modality：["text"]/["video"]/["text","video"]
+    modal_in_dims = config["modal_in_dims"]  # Modal input dimension：{"text":768, "video":2048}
 
-    # 2. 加载基础数据
-    # 评分数据：user_id, movie_id, rating, timestamp
+    # 2. Loading basic data
+    # Rating data：user_id, movie_id, rating, timestamp
     ratings = pd.read_csv(
         os.path.join(data_path, "ratings.dat"),
         sep="::", names=["user_id", "movie_id", "rating", "timestamp"],
         engine="python", encoding="latin-1"
     )
-    # 电影数据：movie_id, title, genres
+    # Movie Data：movie_id, title, genres
     movies = pd.read_csv(
         os.path.join(data_path, "movies.dat"),
         sep="::", names=["movie_id", "title", "genres"],
         engine="python", encoding="latin-1"
     )
 
-    # ========== 核心修复1：小数据量采样（调优提速） ==========
-    # 支持采样比例配置（默认全量，调优时用20%）
-    sample_frac = config.get("sample_frac", 1.0)  # 从config读取采样比例
+    # ========== 1：Small data volume sampling (optimization and speed improvement) ==========
+    # Supports sampling ratio configuration (default is full, use 20% for optimization).
+    sample_frac = config.get("sample_frac", 1.0)  # Read the sampling ratio from the configuration.
     if sample_frac < 1.0:
-        print(f"📌 采样{sample_frac * 100}%数据用于调优（提速）")
-        # 按用户采样（保证每个用户至少有1条记录）
+        print(f"sample {sample_frac * 100}%")
+        # Sampling by user (ensuring at least one record for each user)
         user_ids = ratings["user_id"].unique()
         sampled_users = np.random.choice(user_ids, size=int(len(user_ids) * sample_frac), replace=False)
         ratings = ratings[ratings["user_id"].isin(sampled_users)]
 
-    # ========== 核心修复2：过滤只有1条评分的用户 ==========
-    # 统计每个用户的评分数量
+    # ========== 2：Filter users with only one rating ==========
+    # Count the number of ratings for each user
     user_rating_count = ratings["user_id"].value_counts()
-    # 保留至少有2条评分的用户（满足stratify分层要求）
+    # Users with at least two ratings are retained (meeting stratify tiering requirements).
     valid_users = user_rating_count[user_rating_count >= 2].index
     ratings = ratings[ratings["user_id"].isin(valid_users)]
-    print(f"📌 过滤后保留用户数：{len(valid_users)}（原用户数：{len(user_rating_count)}）")
-    print(f"📌 过滤后评分样本数：{len(ratings)}")
+    print(f"Number of users retained after filtering:{len(valid_users)}（Original user count：{len(user_rating_count)}）")
+    print(f"Number of filtered rating samples：{len(ratings)}")
 
-    # 3. 构建ID映射（将原始ID转为连续索引）
+    # 3. Construct an ID mapping (converting raw IDs into consecutive indices)
     user_ids = ratings["user_id"].unique()
     movie_ids = ratings["movie_id"].unique()
     user2idx = {uid: idx for idx, uid in enumerate(user_ids)}
@@ -60,21 +59,21 @@ def load_graph_bundle_data(config):
     num_users = len(user2idx)
     num_movies = len(movie2idx)
 
-    # 4. 转换为连续ID（方便模型嵌入层处理）
+    # 4. Convert to continuous IDs (for easier processing in the model embedding layer).
     ratings["user_idx"] = ratings["user_id"].map(user2idx)
     ratings["movie_idx"] = ratings["movie_id"].map(movie2idx)
 
-    # 5. 分层划分数据集（核心：按用户分层，保证每个用户的评分分布）
-    # 第一步：划分训练集（80%）和临时集（20%）
+    # 5. Stratified dataset partitioning (core: stratify by user to ensure the rating distribution for each user)
+    # Step 1: Divide the dataset into a training set (80%) and a temporary set (20%).
     train_ratings, temp_ratings = train_test_split(
         ratings, test_size=0.2, random_state=42, stratify=ratings["user_idx"]
     )
-    # 第二步：划分验证集（10%）和测试集（10%）
+    # Step 2: Divide the dataset into a validation set (10%) and a test set (10%).
     val_ratings, test_ratings = train_test_split(
         temp_ratings, test_size=0.5, random_state=42, stratify=temp_ratings["user_idx"]
     )
 
-    # 6. 构建训练/验证/测试样本（user-movie对 + 真实评分）
+    # 6. Construct training/validation/test samples (user-movie pairs + real ratings)
     def build_samples(ratings_df):
         user_movie_pairs = np.array(list(zip(ratings_df["user_idx"], ratings_df["movie_idx"])))
         true_ratings = np.array(ratings_df["rating"], dtype=np.float32)
@@ -84,91 +83,89 @@ def load_graph_bundle_data(config):
     val_pairs, val_ratings_arr = build_samples(val_ratings)
     test_pairs, test_ratings_arr = build_samples(test_ratings)
 
-    # 7. 加载指定的模态特征（核心修复：仅加载config中指定的模态）
-    movie_feats = {}  # 最终返回的特征字典，仅包含当前需要的模态
+    # 7. Load specified modal features
+    movie_feats = {}  # The final returned feature dictionary contains only the modalities needed at the moment.
     raw_movie_ids = movies["movie_id"].tolist()
-    raw_movie2feat_idx = {mid: idx for idx, mid in enumerate(raw_movie_ids)}  # 原始电影ID到特征索引的映射
+    raw_movie2feat_idx = {mid: idx for idx, mid in enumerate(raw_movie_ids)}  # Mapping from original movie ID to feature index
 
-    for modal in modals:  # 仅遍历当前配置指定的模态
-        # 拼接特征文件路径：feat_path/movie_{modal}_emb.pt
+    for modal in modals:  # Only traverse the modal specified in the current configuration.
+        # The path to the spliced feature file is: feat_path/movie_{modal}_emb.pt
         feat_file = os.path.join(feat_path, f"movie_{modal}_emb.pt")
 
-        # 检查特征文件是否存在（避免文件缺失报错）
+        # Check if the feature file exists (to avoid errors due to missing files).
         if not os.path.exists(feat_file):
-            raise FileNotFoundError(f"图束模型需要{modal}特征文件，但未找到：{feat_file}")
+            raise FileNotFoundError(f"The bundle model requires a {modal} feature file, but it was not found: {feat_file}")
 
-        # 加载模态特征
+        # Loading modal features
         modal_feat = torch.load(feat_file, map_location="cpu")
-        print(f"✅ 加载{modal}特征（图束适配）：原始维度 {modal_feat.shape}")
+        print(f"Load {modal} features (bundle adaptation): Original dimensions {modal_feat.shape}")
 
-        # 特征对齐：将原始特征对齐到当前数据集的电影ID（处理缺失电影）
+        # Feature alignment: Aligns the original features to the movie IDs in the current dataset (handles missing movies).
         aligned_feat = []
-        for mid in movie_ids:  # 遍历当前数据集的所有电影ID
+        for mid in movie_ids:
             if mid in raw_movie2feat_idx:
-                # 存在该电影的特征，直接取
                 aligned_feat.append(modal_feat[raw_movie2feat_idx[mid]])
             else:
-                # 无特征的电影，用全0填充（避免维度不匹配）
                 aligned_feat.append(torch.zeros(modal_in_dims[modal]))
 
-        # 转换为tensor并保存到字典
+        # Convert to tensor and save to dictionary
         movie_feats[modal] = torch.stack(aligned_feat)
-        print(f"✅ 对齐{modal}特征：最终维度 {movie_feats[modal].shape}（电影数：{num_movies}，维度：{modal_in_dims[modal]}）")
+        print(f"Alignment {modal} features：final dim: {movie_feats[modal].shape}（movies：{num_movies}，dimension：{modal_in_dims[modal]}）")
 
-    # 8. 封装返回数据（仅包含当前需要的模态特征，无冗余）
+    # 8. Encapsulate the returned data
     data_dict = {
-        # 基础信息
+        # basic
         "num_users": num_users,
         "num_movies": num_movies,
         "user2idx": user2idx,
         "movie2idx": movie2idx,
-        # 模态相关（核心：仅返回当前配置的模态）
+        # Modal correlation
         "movie_feats": movie_feats,
         "modals": modals,
         "modal_in_dims": modal_in_dims,
-        # 训练集
+        # training set
         "train_pairs": train_pairs,
         "train_ratings": train_ratings_arr,
-        # 验证集
+        # Validation set
         "val_pairs": val_pairs,
         "val_ratings": val_ratings_arr,
-        # 测试集
+        # test set
         "test_pairs": test_pairs,
         "test_ratings": test_ratings_arr
     }
 
-    # 打印数据集划分信息
-    print(f"\n===== 数据集划分 =====")
-    print(f"训练集样本数：{len(train_ratings_arr)} ({len(train_ratings_arr) / len(ratings) * 100:.1f}%)")
-    print(f"验证集样本数：{len(val_ratings_arr)} ({len(val_ratings_arr) / len(ratings) * 100:.1f}%)")
-    print(f"测试集样本数：{len(test_ratings_arr)} ({len(test_ratings_arr) / len(ratings) * 100:.1f}%)")
-    print(f"当前加载的模态：{modals}")
+    # Print dataset partitioning information
+    print(f"\n===== Dataset partitioning =====")
+    print(f"Number of training set samples：{len(train_ratings_arr)} ({len(train_ratings_arr) / len(ratings) * 100:.1f}%)")
+    print(f"Number of validation set samples：{len(val_ratings_arr)} ({len(val_ratings_arr) / len(ratings) * 100:.1f}%)")
+    print(f"Number of test set samples：{len(test_ratings_arr)} ({len(test_ratings_arr) / len(ratings) * 100:.1f}%)")
+    print(f"Currently loaded modality：{modals}")
 
     return data_dict
 
 
-# 测试代码（验证单/多模态加载是否正常）
+# Test code (to verify whether single/multimodal loading is working correctly)
 if __name__ == "__main__":
-    # 测试配置（可切换modals验证）
+    # Test configuration (modals verification can be switched)
     test_config = {
-        "data_path": "data/ml-1m",  # 替换为你的数据路径
-        "feat_path": "data/features",  # 替换为你的特征路径
-        "modals": ["text"],  # 可切换为["video"]/["text","video"]
+        "data_path": "data/ml-1m",
+        "feat_path": "data/features",
+        "modals": ["text"],  # You can switch to ["video"]/["text","video"]
         "modal_in_dims": {"text": 768, "video": 2048},
-        "sample_frac": 0.2  # 测试20%采样
+        "sample_frac": 0.2  # Test 20% sampling
     }
 
     try:
         data_dict = load_graph_bundle_data(test_config)
-        print(f"\n✅ 数据加载成功！")
-        print(f"加载的模态：{data_dict['modals']}")
-        print(f"特征字典keys：{list(data_dict['movie_feats'].keys())}")
+        print(f"\n✅ Data loading successful！")
+        print(f"Loading modality：{data_dict['modals']}")
+        print(f"Feature dictionary keys：{list(data_dict['movie_feats'].keys())}")
         print(
-            f"Text特征维度：{data_dict['movie_feats'].get('text', '无').shape if 'text' in data_dict['movie_feats'] else '无'}")
+            f"Text Feature Dimensions：{data_dict['movie_feats'].get('text', 'none').shape if 'text' in data_dict['movie_feats'] else 'none'}")
         print(
-            f"Video特征维度：{data_dict['movie_feats'].get('video', '无').shape if 'video' in data_dict['movie_feats'] else '无'}")
+            f"Video feature dimensions：{data_dict['movie_feats'].get('video', 'none').shape if 'video' in data_dict['movie_feats'] else 'none'}")
     except Exception as e:
-        print(f"❌ 数据加载失败：{e}")
+        print(f"❌ Data loading failed：{e}")
         import traceback
 
         traceback.print_exc()

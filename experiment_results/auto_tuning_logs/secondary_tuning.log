@@ -1,22 +1,220 @@
-nohup: 忽略输入
-===== Loading Data (secondary Layer Tuning) =====
-📌 采样20.0%数据用于调优（提速）
-📌 过滤后保留用户数：1208（原用户数：1208）
-📌 过滤后评分样本数：191991
-✅ 加载text特征（图束适配）：原始维度 torch.Size([3883, 768])
-✅ 对齐text特征：最终维度 torch.Size([3438, 768])（电影数：3438，维度：768）
-✅ 加载video特征（图束适配）：原始维度 torch.Size([3883, 2048])
-✅ 对齐video特征：最终维度 torch.Size([3438, 2048])（电影数：3438，维度：2048）
+nohup: Ignore input
 
-===== 数据集划分 =====
-训练集样本数：153592 (80.0%)
-验证集样本数：19199 (10.0%)
-测试集样本数：19200 (10.0%)
-当前加载的模态：['text', 'video']
+===== Loading Data (Secondary Layer Tuning) =====
+
+📌 Sample 20.0% of the data for optimization (speeding up)
+
+📌 Number of users retained after filtering: 1208 (Original number of users: 1208)
+
+📌 Number of rating samples after filtering: 191991
+
+✅ Load text features (tribulation adaptation): Original dimensions torch.Size([3883, 768])
+
+✅ Align text features: Final dimensions torch.Size([3438, 768]) (Number of movies: 3438, Dimension: 768)
+
+✅ Load video features (tribulation adaptation): Original dimensions torch.Size([3883, 2048])
+
+✅ Align video features: Final dimensions torch.Size([3438, 2048]) (Number of movies: 3438, Dimension: 2048)
+
+===== Dataset Partitioning ===== Training set samples: 153592 (80.0%) Validation set samples: 19199 (10.0%) Test set samples: 19200 (10.0%) Currently loaded modality: ['text', 'video']
 Current optimization stage:secondary
 Search space:dict_keys(['modals', 'lr', 'node_stalk_dim', 'fusion_type', 'batch_size', 'edge_stalk_dim', 'num_diffusion_layers', 'weight_decay', 'dropout_rate', 'epochs'])
 Number of configurations generated:48
-secondary stage tuning:   0%|          | 0/48 [00:00<?, ?it/s]                                                              secondary stage tuning:   0%|          | 0/48 [00:12<?, ?it/s]secondary stage tuning:   2%|▏         | 1/48 [00:12<09:34, 12.23s/it]                                                                      secondary stage tuning:   2%|▏         | 1/48 [00:19<09:34, 12.23s/it]secondary stage tuning:   4%|▍         | 2/48 [00:19<07:14,  9.43s/it]                                                                      secondary stage tuning:   4%|▍         | 2/48 [00:34<07:14,  9.43s/it]secondary stage tuning:   6%|▋         | 3/48 [00:34<08:48, 11.74s/it]                                                                      secondary stage tuning:   6%|▋         | 3/48 [00:43<08:48, 11.74s/it]secondary stage tuning:   8%|▊         | 4/48 [00:43<07:58, 10.88s/it]                                                                      secondary stage tuning:   8%|▊         | 4/48 [00:49<07:58, 10.88s/it]secondary stage tuning:  10%|█         | 5/48 [00:49<06:32,  9.14s/it]                                                                      secondary stage tuning:  10%|█         | 5/48 [00:59<06:32,  9.14s/it]secondary stage tuning:  12%|█▎        | 6/48 [00:59<06:26,  9.19s/it]                                                                      secondary stage tuning:  12%|█▎        | 6/48 [01:21<06:26,  9.19s/it]secondary stage tuning:  15%|█▍        | 7/48 [01:21<09:10, 13.43s/it]                                                                      secondary stage tuning:  15%|█▍        | 7/48 [01:28<09:10, 13.43s/it]secondary stage tuning:  17%|█▋        | 8/48 [01:28<07:34, 11.37s/it]                                                                      secondary stage tuning:  17%|█▋        | 8/48 [01:36<07:34, 11.37s/it]secondary stage tuning:  19%|█▉        | 9/48 [01:36<06:48, 10.48s/it]                                                                      secondary stage tuning:  19%|█▉        | 9/48 [01:44<06:48, 10.48s/it]secondary stage tuning:  21%|██        | 10/48 [01:44<06:08,  9.70s/it]                                                                       secondary stage tuning:  21%|██        | 10/48 [01:58<06:08,  9.70s/it]secondary stage tuning:  23%|██▎       | 11/48 [01:58<06:44, 10.92s/it]                                                                       secondary stage tuning:  23%|██▎       | 11/48 [02:07<06:44, 10.92s/it]secondary stage tuning:  25%|██▌       | 12/48 [02:07<06:13, 10.36s/it]                                                                       secondary stage tuning:  25%|██▌       | 12/48 [02:20<06:13, 10.36s/it]secondary stage tuning:  27%|██▋       | 13/48 [02:20<06:26, 11.04s/it]                                                                       secondary stage tuning:  27%|██▋       | 13/48 [02:34<06:26, 11.04s/it]secondary stage tuning:  29%|██▉       | 14/48 [02:34<06:52, 12.13s/it]                                                                       secondary stage tuning:  29%|██▉       | 14/48 [02:49<06:52, 12.13s/it]secondary stage tuning:  31%|███▏      | 15/48 [02:49<07:08, 12.97s/it]                                                                       secondary stage tuning:  31%|███▏      | 15/48 [03:10<07:08, 12.97s/it]secondary stage tuning:  33%|███▎      | 16/48 [03:10<08:08, 15.26s/it]                                                                       secondary stage tuning:  33%|███▎      | 16/48 [03:22<08:08, 15.26s/it]secondary stage tuning:  35%|███▌      | 17/48 [03:22<07:21, 14.23s/it]                                                                       secondary stage tuning:  35%|███▌      | 17/48 [03:38<07:21, 14.23s/it]secondary stage tuning:  38%|███▊      | 18/48 [03:38<07:30, 15.03s/it]                                                                       secondary stage tuning:  38%|███▊      | 18/48 [03:52<07:30, 15.03s/it]secondary stage tuning:  40%|███▉      | 19/48 [03:52<07:03, 14.60s/it]                                                                       secondary stage tuning:  40%|███▉      | 19/48 [04:03<07:03, 14.60s/it]secondary stage tuning:  42%|████▏     | 20/48 [04:03<06:18, 13.54s/it]                                                                       secondary stage tuning:  42%|████▏     | 20/48 [04:21<06:18, 13.54s/it]secondary stage tuning:  44%|████▍     | 21/48 [04:21<06:42, 14.91s/it]                                                                       secondary stage tuning:  44%|████▍     | 21/48 [04:31<06:42, 14.91s/it]secondary stage tuning:  46%|████▌     | 22/48 [04:31<05:50, 13.49s/it]                                                                       secondary stage tuning:  46%|████▌     | 22/48 [04:45<05:50, 13.49s/it]secondary stage tuning:  48%|████▊     | 23/48 [04:45<05:38, 13.54s/it]                                                                       secondary stage tuning:  48%|████▊     | 23/48 [04:59<05:38, 13.54s/it]secondary stage tuning:  50%|█████     | 24/48 [04:59<05:27, 13.64s/it]                                                                       secondary stage tuning:  50%|█████     | 24/48 [05:06<05:27, 13.64s/it]secondary stage tuning:  52%|█████▏    | 25/48 [05:06<04:26, 11.58s/it]                                                                       secondary stage tuning:  52%|█████▏    | 25/48 [05:19<04:26, 11.58s/it]secondary stage tuning:  54%|█████▍    | 26/48 [05:19<04:25, 12.08s/it]                                                                       secondary stage tuning:  54%|█████▍    | 26/48 [05:29<04:25, 12.08s/it]secondary stage tuning:  56%|█████▋    | 27/48 [05:29<03:58, 11.33s/it]                                                                       secondary stage tuning:  56%|█████▋    | 27/48 [05:47<03:58, 11.33s/it]secondary stage tuning:  58%|█████▊    | 28/48 [05:47<04:27, 13.39s/it]                                                                       secondary stage tuning:  58%|█████▊    | 28/48 [06:01<04:27, 13.39s/it]secondary stage tuning:  60%|██████    | 29/48 [06:01<04:17, 13.54s/it]                                                                       secondary stage tuning:  60%|██████    | 29/48 [06:13<04:17, 13.54s/it]secondary stage tuning:  62%|██████▎   | 30/48 [06:13<03:55, 13.10s/it]                                                                       secondary stage tuning:  62%|██████▎   | 30/48 [06:21<03:55, 13.10s/it]secondary stage tuning:  65%|██████▍   | 31/48 [06:21<03:15, 11.52s/it]                                                                       secondary stage tuning:  65%|██████▍   | 31/48 [06:33<03:15, 11.52s/it]secondary stage tuning:  67%|██████▋   | 32/48 [06:33<03:08, 11.77s/it]                                                                       secondary stage tuning:  67%|██████▋   | 32/48 [06:50<03:08, 11.77s/it]secondary stage tuning:  69%|██████▉   | 33/48 [06:50<03:20, 13.35s/it]                                                                       secondary stage tuning:  69%|██████▉   | 33/48 [06:59<03:20, 13.35s/it]secondary stage tuning:  71%|███████   | 34/48 [06:59<02:50, 12.16s/it]                                                                       secondary stage tuning:  71%|███████   | 34/48 [07:11<02:50, 12.16s/it]secondary stage tuning:  73%|███████▎  | 35/48 [07:11<02:35, 11.93s/it]                                                                       secondary stage tuning:  73%|███████▎  | 35/48 [07:25<02:35, 11.93s/it]secondary stage tuning:  75%|███████▌  | 36/48 [07:25<02:30, 12.51s/it]                                                                       secondary stage tuning:  75%|███████▌  | 36/48 [07:38<02:30, 12.51s/it]secondary stage tuning:  77%|███████▋  | 37/48 [07:38<02:21, 12.86s/it]                                                                       secondary stage tuning:  77%|███████▋  | 37/48 [08:03<02:21, 12.86s/it]secondary stage tuning:  79%|███████▉  | 38/48 [08:03<02:43, 16.33s/it]                                                                       secondary stage tuning:  79%|███████▉  | 38/48 [08:15<02:43, 16.33s/it]secondary stage tuning:  81%|████████▏ | 39/48 [08:15<02:14, 15.00s/it]                                                                       secondary stage tuning:  81%|████████▏ | 39/48 [08:31<02:14, 15.00s/it]secondary stage tuning:  83%|████████▎ | 40/48 [08:31<02:03, 15.40s/it]                                                                       secondary stage tuning:  83%|████████▎ | 40/48 [08:46<02:03, 15.40s/it]secondary stage tuning:  85%|████████▌ | 41/48 [08:46<01:46, 15.24s/it]                                                                       secondary stage tuning:  85%|████████▌ | 41/48 [09:07<01:46, 15.24s/it]secondary stage tuning:  88%|████████▊ | 42/48 [09:07<01:41, 16.98s/it]                                                                       secondary stage tuning:  88%|████████▊ | 42/48 [09:15<01:41, 16.98s/it]secondary stage tuning:  90%|████████▉ | 43/48 [09:15<01:11, 14.22s/it]                                                                       secondary stage tuning:  90%|████████▉ | 43/48 [09:27<01:11, 14.22s/it]secondary stage tuning:  92%|█████████▏| 44/48 [09:27<00:54, 13.58s/it]                                                                       secondary stage tuning:  92%|█████████▏| 44/48 [09:39<00:54, 13.58s/it]secondary stage tuning:  94%|█████████▍| 45/48 [09:39<00:39, 13.31s/it]                                                                       secondary stage tuning:  94%|█████████▍| 45/48 [09:49<00:39, 13.31s/it]secondary stage tuning:  96%|█████████▌| 46/48 [09:49<00:24, 12.09s/it]                                                                       secondary stage tuning:  96%|█████████▌| 46/48 [10:05<00:24, 12.09s/it]secondary stage tuning:  98%|█████████▊| 47/48 [10:05<00:13, 13.34s/it]                                                                       secondary stage tuning:  98%|█████████▊| 47/48 [10:15<00:13, 13.34s/it]secondary stage tuning: 100%|██████████| 48/48 [10:15<00:00, 12.39s/it]secondary stage tuning: 100%|██████████| 48/48 [10:15<00:00, 12.82s/it]
+
+secondary stage tuning:   0%|          | 0/48 [00:00<?, ?it/s]
+                                                              
+
+secondary stage tuning:   0%|          | 0/48 [00:12<?, ?it/s]
+secondary stage tuning:   2%|▏         | 1/48 [00:12<09:34, 12.23s/it]
+                                                                      
+
+secondary stage tuning:   2%|▏         | 1/48 [00:19<09:34, 12.23s/it]
+secondary stage tuning:   4%|▍         | 2/48 [00:19<07:14,  9.43s/it]
+                                                                      
+
+secondary stage tuning:   4%|▍         | 2/48 [00:34<07:14,  9.43s/it]
+secondary stage tuning:   6%|▋         | 3/48 [00:34<08:48, 11.74s/it]
+                                                                      
+
+secondary stage tuning:   6%|▋         | 3/48 [00:43<08:48, 11.74s/it]
+secondary stage tuning:   8%|▊         | 4/48 [00:43<07:58, 10.88s/it]
+                                                                      
+
+secondary stage tuning:   8%|▊         | 4/48 [00:49<07:58, 10.88s/it]
+secondary stage tuning:  10%|█         | 5/48 [00:49<06:32,  9.14s/it]
+                                                                      
+
+secondary stage tuning:  10%|█         | 5/48 [00:59<06:32,  9.14s/it]
+secondary stage tuning:  12%|█▎        | 6/48 [00:59<06:26,  9.19s/it]
+                                                                      
+
+secondary stage tuning:  12%|█▎        | 6/48 [01:21<06:26,  9.19s/it]
+secondary stage tuning:  15%|█▍        | 7/48 [01:21<09:10, 13.43s/it]
+                                                                      
+
+secondary stage tuning:  15%|█▍        | 7/48 [01:28<09:10, 13.43s/it]
+secondary stage tuning:  17%|█▋        | 8/48 [01:28<07:34, 11.37s/it]
+                                                                      
+
+secondary stage tuning:  17%|█▋        | 8/48 [01:36<07:34, 11.37s/it]
+secondary stage tuning:  19%|█▉        | 9/48 [01:36<06:48, 10.48s/it]
+                                                                      
+
+secondary stage tuning:  19%|█▉        | 9/48 [01:44<06:48, 10.48s/it]
+secondary stage tuning:  21%|██        | 10/48 [01:44<06:08,  9.70s/it]
+                                                                       
+
+secondary stage tuning:  21%|██        | 10/48 [01:58<06:08,  9.70s/it]
+secondary stage tuning:  23%|██▎       | 11/48 [01:58<06:44, 10.92s/it]
+                                                                       
+
+secondary stage tuning:  23%|██▎       | 11/48 [02:07<06:44, 10.92s/it]
+secondary stage tuning:  25%|██▌       | 12/48 [02:07<06:13, 10.36s/it]
+                                                                       
+
+secondary stage tuning:  25%|██▌       | 12/48 [02:20<06:13, 10.36s/it]
+secondary stage tuning:  27%|██▋       | 13/48 [02:20<06:26, 11.04s/it]
+                                                                       
+
+secondary stage tuning:  27%|██▋       | 13/48 [02:34<06:26, 11.04s/it]
+secondary stage tuning:  29%|██▉       | 14/48 [02:34<06:52, 12.13s/it]
+                                                                       
+
+secondary stage tuning:  29%|██▉       | 14/48 [02:49<06:52, 12.13s/it]
+secondary stage tuning:  31%|███▏      | 15/48 [02:49<07:08, 12.97s/it]
+                                                                       
+
+secondary stage tuning:  31%|███▏      | 15/48 [03:10<07:08, 12.97s/it]
+secondary stage tuning:  33%|███▎      | 16/48 [03:10<08:08, 15.26s/it]
+                                                                       
+
+secondary stage tuning:  33%|███▎      | 16/48 [03:22<08:08, 15.26s/it]
+secondary stage tuning:  35%|███▌      | 17/48 [03:22<07:21, 14.23s/it]
+                                                                       
+
+secondary stage tuning:  35%|███▌      | 17/48 [03:38<07:21, 14.23s/it]
+secondary stage tuning:  38%|███▊      | 18/48 [03:38<07:30, 15.03s/it]
+                                                                       
+
+secondary stage tuning:  38%|███▊      | 18/48 [03:52<07:30, 15.03s/it]
+secondary stage tuning:  40%|███▉      | 19/48 [03:52<07:03, 14.60s/it]
+                                                                       
+
+secondary stage tuning:  40%|███▉      | 19/48 [04:03<07:03, 14.60s/it]
+secondary stage tuning:  42%|████▏     | 20/48 [04:03<06:18, 13.54s/it]
+                                                                       
+
+secondary stage tuning:  42%|████▏     | 20/48 [04:21<06:18, 13.54s/it]
+secondary stage tuning:  44%|████▍     | 21/48 [04:21<06:42, 14.91s/it]
+                                                                       
+
+secondary stage tuning:  44%|████▍     | 21/48 [04:31<06:42, 14.91s/it]
+secondary stage tuning:  46%|████▌     | 22/48 [04:31<05:50, 13.49s/it]
+                                                                       
+
+secondary stage tuning:  46%|████▌     | 22/48 [04:45<05:50, 13.49s/it]
+secondary stage tuning:  48%|████▊     | 23/48 [04:45<05:38, 13.54s/it]
+                                                                       
+
+secondary stage tuning:  48%|████▊     | 23/48 [04:59<05:38, 13.54s/it]
+secondary stage tuning:  50%|█████     | 24/48 [04:59<05:27, 13.64s/it]
+                                                                       
+
+secondary stage tuning:  50%|█████     | 24/48 [05:06<05:27, 13.64s/it]
+secondary stage tuning:  52%|█████▏    | 25/48 [05:06<04:26, 11.58s/it]
+                                                                       
+
+secondary stage tuning:  52%|█████▏    | 25/48 [05:19<04:26, 11.58s/it]
+secondary stage tuning:  54%|█████▍    | 26/48 [05:19<04:25, 12.08s/it]
+                                                                       
+
+secondary stage tuning:  54%|█████▍    | 26/48 [05:29<04:25, 12.08s/it]
+secondary stage tuning:  56%|█████▋    | 27/48 [05:29<03:58, 11.33s/it]
+                                                                       
+
+secondary stage tuning:  56%|█████▋    | 27/48 [05:47<03:58, 11.33s/it]
+secondary stage tuning:  58%|█████▊    | 28/48 [05:47<04:27, 13.39s/it]
+                                                                       
+
+secondary stage tuning:  58%|█████▊    | 28/48 [06:01<04:27, 13.39s/it]
+secondary stage tuning:  60%|██████    | 29/48 [06:01<04:17, 13.54s/it]
+                                                                       
+
+secondary stage tuning:  60%|██████    | 29/48 [06:13<04:17, 13.54s/it]
+secondary stage tuning:  62%|██████▎   | 30/48 [06:13<03:55, 13.10s/it]
+                                                                       
+
+secondary stage tuning:  62%|██████▎   | 30/48 [06:21<03:55, 13.10s/it]
+secondary stage tuning:  65%|██████▍   | 31/48 [06:21<03:15, 11.52s/it]
+                                                                       
+
+secondary stage tuning:  65%|██████▍   | 31/48 [06:33<03:15, 11.52s/it]
+secondary stage tuning:  67%|██████▋   | 32/48 [06:33<03:08, 11.77s/it]
+                                                                       
+
+secondary stage tuning:  67%|██████▋   | 32/48 [06:50<03:08, 11.77s/it]
+secondary stage tuning:  69%|██████▉   | 33/48 [06:50<03:20, 13.35s/it]
+                                                                       
+
+secondary stage tuning:  69%|██████▉   | 33/48 [06:59<03:20, 13.35s/it]
+secondary stage tuning:  71%|███████   | 34/48 [06:59<02:50, 12.16s/it]
+                                                                       
+
+secondary stage tuning:  71%|███████   | 34/48 [07:11<02:50, 12.16s/it]
+secondary stage tuning:  73%|███████▎  | 35/48 [07:11<02:35, 11.93s/it]
+                                                                       
+
+secondary stage tuning:  73%|███████▎  | 35/48 [07:25<02:35, 11.93s/it]
+secondary stage tuning:  75%|███████▌  | 36/48 [07:25<02:30, 12.51s/it]
+                                                                       
+
+secondary stage tuning:  75%|███████▌  | 36/48 [07:38<02:30, 12.51s/it]
+secondary stage tuning:  77%|███████▋  | 37/48 [07:38<02:21, 12.86s/it]
+                                                                       
+
+secondary stage tuning:  77%|███████▋  | 37/48 [08:03<02:21, 12.86s/it]
+secondary stage tuning:  79%|███████▉  | 38/48 [08:03<02:43, 16.33s/it]
+                                                                       
+
+secondary stage tuning:  79%|███████▉  | 38/48 [08:15<02:43, 16.33s/it]
+secondary stage tuning:  81%|████████▏ | 39/48 [08:15<02:14, 15.00s/it]
+                                                                       
+
+secondary stage tuning:  81%|████████▏ | 39/48 [08:31<02:14, 15.00s/it]
+secondary stage tuning:  83%|████████▎ | 40/48 [08:31<02:03, 15.40s/it]
+                                                                       
+
+secondary stage tuning:  83%|████████▎ | 40/48 [08:46<02:03, 15.40s/it]
+secondary stage tuning:  85%|████████▌ | 41/48 [08:46<01:46, 15.24s/it]
+                                                                       
+
+secondary stage tuning:  85%|████████▌ | 41/48 [09:07<01:46, 15.24s/it]
+secondary stage tuning:  88%|████████▊ | 42/48 [09:07<01:41, 16.98s/it]
+                                                                       
+
+secondary stage tuning:  88%|████████▊ | 42/48 [09:15<01:41, 16.98s/it]
+secondary stage tuning:  90%|████████▉ | 43/48 [09:15<01:11, 14.22s/it]
+                                                                       
+
+secondary stage tuning:  90%|████████▉ | 43/48 [09:27<01:11, 14.22s/it]
+secondary stage tuning:  92%|█████████▏| 44/48 [09:27<00:54, 13.58s/it]
+                                                                       
+
+secondary stage tuning:  92%|█████████▏| 44/48 [09:39<00:54, 13.58s/it]
+secondary stage tuning:  94%|█████████▍| 45/48 [09:39<00:39, 13.31s/it]
+                                                                       
+
+secondary stage tuning:  94%|█████████▍| 45/48 [09:49<00:39, 13.31s/it]
+secondary stage tuning:  96%|█████████▌| 46/48 [09:49<00:24, 12.09s/it]
+                                                                       
+
+secondary stage tuning:  96%|█████████▌| 46/48 [10:05<00:24, 12.09s/it]
+secondary stage tuning:  98%|█████████▊| 47/48 [10:05<00:13, 13.34s/it]
+                                                                       
+
+secondary stage tuning:  98%|█████████▊| 47/48 [10:15<00:13, 13.34s/it]
+secondary stage tuning: 100%|██████████| 48/48 [10:15<00:00, 12.39s/it]
+secondary stage tuning: 100%|██████████| 48/48 [10:15<00:00, 12.82s/it]
 config0 | Val RMSE: 0.9068 | best: 0.9068 | time: 0.20min
 config1 | Val RMSE: 0.9111 | best: 0.9068 | time: 0.12min
 config2 | Val RMSE: 0.8950 | best: 0.8950 | time: 0.24min

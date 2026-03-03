@@ -6,7 +6,7 @@ data:
   modal_in_dims:
     text: 768
     video: 2048
-  sample_frac: 1  # 核心：调优时用20%数据，提速80%
+  sample_frac: 1
 
 train:
   device: "cuda:0"

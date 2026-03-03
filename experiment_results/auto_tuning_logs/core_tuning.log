@@ -1,22 +1,348 @@
-nohup: 忽略输入
-===== Loading Data (core Layer Tuning) =====
-📌 采样20.0%数据用于调优（提速）
-📌 过滤后保留用户数：1208（原用户数：1208）
-📌 过滤后评分样本数：191991
-✅ 加载text特征（图束适配）：原始维度 torch.Size([3883, 768])
-✅ 对齐text特征：最终维度 torch.Size([3438, 768])（电影数：3438，维度：768）
-✅ 加载video特征（图束适配）：原始维度 torch.Size([3883, 2048])
-✅ 对齐video特征：最终维度 torch.Size([3438, 2048])（电影数：3438，维度：2048）
+nohup: Ignore input
 
-===== 数据集划分 =====
-训练集样本数：153592 (80.0%)
-验证集样本数：19199 (10.0%)
-测试集样本数：19200 (10.0%)
-当前加载的模态：['text', 'video']
+===== Loading Data (core Layer Tuning) =====
+
+📌 Sample 20.0% of the data for optimization (speeding up)
+
+📌 Number of users retained after filtering: 1208 (Original number of users: 1208)
+
+📌 Number of rating samples after filtering: 191991
+
+✅ Load text features (tribulation adaptation): Original dimensions torch.Size([3883, 768])
+
+✅ Align text features: Final dimensions torch.Size([3438, 768]) (Number of movies: 3438, Dimension: 768)
+
+✅ Load video features (tribulation adaptation): Original dimensions torch.Size([3883, 2048])
+
+✅ Align video features: Final dimensions torch.Size([3438, 2048]) (Number of movies: 3438, Dimension: 2048)
+
+===== Dataset Partitioning ===== Training set samples: 153592 (80.0%) Validation set samples: 19199 (10.0%) Test set samples: 19200 (10.0%) Currently loaded modality: ['text', 'video']
 Current optimization stage:core
 Search space:dict_keys(['modals', 'lr', 'node_stalk_dim', 'fusion_type', 'batch_size', 'edge_stalk_dim', 'num_diffusion_layers', 'weight_decay', 'dropout_rate', 'epochs'])
 Number of configurations generated:80
-core stage tuning:   0%|          | 0/80 [00:00<?, ?it/s]                                                         core stage tuning:   0%|          | 0/80 [00:55<?, ?it/s]core stage tuning:   1%|▏         | 1/80 [00:55<1:12:33, 55.11s/it]                                                                   core stage tuning:   1%|▏         | 1/80 [01:15<1:12:33, 55.11s/it]core stage tuning:   2%|▎         | 2/80 [01:15<45:15, 34.81s/it]                                                                   core stage tuning:   2%|▎         | 2/80 [01:48<45:15, 34.81s/it]core stage tuning:   4%|▍         | 3/80 [01:48<43:25, 33.83s/it]                                                                 core stage tuning:   4%|▍         | 3/80 [02:26<43:25, 33.83s/it]core stage tuning:   5%|▌         | 4/80 [02:26<45:05, 35.60s/it]                                                                 core stage tuning:   5%|▌         | 4/80 [02:39<45:05, 35.60s/it]core stage tuning:   6%|▋         | 5/80 [02:39<34:17, 27.43s/it]                                                                 core stage tuning:   6%|▋         | 5/80 [03:19<34:17, 27.43s/it]core stage tuning:   8%|▊         | 6/80 [03:19<38:56, 31.58s/it]                                                                 core stage tuning:   8%|▊         | 6/80 [03:29<38:56, 31.58s/it]core stage tuning:   9%|▉         | 7/80 [03:29<29:48, 24.50s/it]                                                                 core stage tuning:   9%|▉         | 7/80 [03:47<29:48, 24.50s/it]core stage tuning:  10%|█         | 8/80 [03:47<26:54, 22.42s/it]                                                                 core stage tuning:  10%|█         | 8/80 [04:06<26:54, 22.42s/it]core stage tuning:  11%|█▏        | 9/80 [04:06<25:30, 21.55s/it]                                                                 core stage tuning:  11%|█▏        | 9/80 [04:31<25:30, 21.55s/it]core stage tuning:  12%|█▎        | 10/80 [04:31<26:10, 22.44s/it]                                                                  core stage tuning:  12%|█▎        | 10/80 [06:17<26:10, 22.44s/it]core stage tuning:  14%|█▍        | 11/80 [06:17<55:23, 48.17s/it]                                                                  core stage tuning:  14%|█▍        | 11/80 [06:43<55:23, 48.17s/it]core stage tuning:  15%|█▌        | 12/80 [06:43<46:48, 41.30s/it]                                                                  core stage tuning:  15%|█▌        | 12/80 [07:25<46:48, 41.30s/it]core stage tuning:  16%|█▋        | 13/80 [07:25<46:28, 41.62s/it]                                                                  core stage tuning:  16%|█▋        | 13/80 [07:32<46:28, 41.62s/it]core stage tuning:  18%|█▊        | 14/80 [07:32<34:05, 30.99s/it]                                                                  core stage tuning:  18%|█▊        | 14/80 [09:23<34:05, 30.99s/it]core stage tuning:  19%|█▉        | 15/80 [09:23<59:40, 55.09s/it]                                                                  core stage tuning:  19%|█▉        | 15/80 [09:34<59:40, 55.09s/it]core stage tuning:  20%|██        | 16/80 [09:34<44:41, 41.90s/it]                                                                  core stage tuning:  20%|██        | 16/80 [11:25<44:41, 41.90s/it]core stage tuning:  21%|██▏       | 17/80 [11:25<1:05:49, 62.70s/it]                                                                    core stage tuning:  21%|██▏       | 17/80 [11:38<1:05:49, 62.70s/it]core stage tuning:  22%|██▎       | 18/80 [11:38<49:28, 47.88s/it]                                                                    core stage tuning:  22%|██▎       | 18/80 [11:50<49:28, 47.88s/it]core stage tuning:  24%|██▍       | 19/80 [11:50<37:32, 36.93s/it]                                                                  core stage tuning:  24%|██▍       | 19/80 [13:08<37:32, 36.93s/it]core stage tuning:  25%|██▌       | 20/80 [13:08<49:23, 49.39s/it]                                                                  core stage tuning:  25%|██▌       | 20/80 [13:16<49:23, 49.39s/it]core stage tuning:  26%|██▋       | 21/80 [13:16<36:27, 37.07s/it]                                                                  core stage tuning:  26%|██▋       | 21/80 [13:55<36:27, 37.07s/it]core stage tuning:  28%|██▊       | 22/80 [13:55<36:10, 37.42s/it]                                                                  core stage tuning:  28%|██▊       | 22/80 [15:28<36:10, 37.42s/it]core stage tuning:  29%|██▉       | 23/80 [15:28<51:32, 54.26s/it]                                                                  core stage tuning:  29%|██▉       | 23/80 [16:23<51:32, 54.26s/it]core stage tuning:  30%|███       | 24/80 [16:23<50:44, 54.37s/it]                                                                  core stage tuning:  30%|███       | 24/80 [17:00<50:44, 54.37s/it]core stage tuning:  31%|███▏      | 25/80 [17:00<45:02, 49.14s/it]                                                                  core stage tuning:  31%|███▏      | 25/80 [17:17<45:02, 49.14s/it]core stage tuning:  32%|███▎      | 26/80 [17:17<35:37, 39.59s/it]                                                                  core stage tuning:  32%|███▎      | 26/80 [17:33<35:37, 39.59s/it]core stage tuning:  34%|███▍      | 27/80 [17:33<28:36, 32.38s/it]                                                                  core stage tuning:  34%|███▍      | 27/80 [17:47<28:36, 32.38s/it]core stage tuning:  35%|███▌      | 28/80 [17:47<23:24, 27.01s/it]                                                                  core stage tuning:  35%|███▌      | 28/80 [18:14<23:24, 27.01s/it]core stage tuning:  36%|███▋      | 29/80 [18:14<23:01, 27.09s/it]                                                                  core stage tuning:  36%|███▋      | 29/80 [18:36<23:01, 27.09s/it]core stage tuning:  38%|███▊      | 30/80 [18:36<21:16, 25.53s/it]                                                                  core stage tuning:  38%|███▊      | 30/80 [18:56<21:16, 25.53s/it]core stage tuning:  39%|███▉      | 31/80 [18:56<19:26, 23.80s/it]                                                                  core stage tuning:  39%|███▉      | 31/80 [19:28<19:26, 23.80s/it]core stage tuning:  40%|████      | 32/80 [19:28<21:01, 26.28s/it]                                                                  core stage tuning:  40%|████      | 32/80 [19:44<21:01, 26.28s/it]core stage tuning:  41%|████▏     | 33/80 [19:44<18:05, 23.09s/it]                                                                  core stage tuning:  41%|████▏     | 33/80 [20:04<18:05, 23.09s/it]core stage tuning:  42%|████▎     | 34/80 [20:04<17:04, 22.28s/it]                                                                  core stage tuning:  42%|████▎     | 34/80 [20:26<17:04, 22.28s/it]core stage tuning:  44%|████▍     | 35/80 [20:26<16:37, 22.16s/it]                                                                  core stage tuning:  44%|████▍     | 35/80 [20:52<16:37, 22.16s/it]core stage tuning:  45%|████▌     | 36/80 [20:52<17:04, 23.28s/it]                                                                  core stage tuning:  45%|████▌     | 36/80 [21:12<17:04, 23.28s/it]core stage tuning:  46%|████▋     | 37/80 [21:12<16:05, 22.45s/it]                                                                  core stage tuning:  46%|████▋     | 37/80 [21:25<16:05, 22.45s/it]core stage tuning:  48%|████▊     | 38/80 [21:25<13:41, 19.57s/it]                                                                  core stage tuning:  48%|████▊     | 38/80 [21:31<13:41, 19.57s/it]core stage tuning:  49%|████▉     | 39/80 [21:31<10:27, 15.31s/it]                                                                  core stage tuning:  49%|████▉     | 39/80 [21:49<10:27, 15.31s/it]core stage tuning:  50%|█████     | 40/80 [21:49<10:44, 16.12s/it]                                                                  core stage tuning:  50%|█████     | 40/80 [21:58<10:44, 16.12s/it]core stage tuning:  51%|█████▏    | 41/80 [21:58<09:05, 13.99s/it]                                                                  core stage tuning:  51%|█████▏    | 41/80 [22:34<09:05, 13.99s/it]core stage tuning:  52%|█████▎    | 42/80 [22:34<13:08, 20.75s/it]                                                                  core stage tuning:  52%|█████▎    | 42/80 [22:44<13:08, 20.75s/it]core stage tuning:  54%|█████▍    | 43/80 [22:44<10:42, 17.37s/it]                                                                  core stage tuning:  54%|█████▍    | 43/80 [22:54<10:42, 17.37s/it]core stage tuning:  55%|█████▌    | 44/80 [22:54<09:13, 15.39s/it]                                                                  core stage tuning:  55%|█████▌    | 44/80 [23:08<09:13, 15.39s/it]core stage tuning:  56%|█████▋    | 45/80 [23:08<08:33, 14.68s/it]                                                                  core stage tuning:  56%|█████▋    | 45/80 [24:07<08:33, 14.68s/it]core stage tuning:  57%|█████▊    | 46/80 [24:07<16:01, 28.27s/it]                                                                  core stage tuning:  57%|█████▊    | 46/80 [25:53<16:01, 28.27s/it]core stage tuning:  59%|█████▉    | 47/80 [25:53<28:18, 51.46s/it]                                                                  core stage tuning:  59%|█████▉    | 47/80 [26:39<28:18, 51.46s/it]core stage tuning:  60%|██████    | 48/80 [26:39<26:29, 49.68s/it]                                                                  core stage tuning:  60%|██████    | 48/80 [26:52<26:29, 49.68s/it]core stage tuning:  61%|██████▏   | 49/80 [26:52<20:01, 38.76s/it]                                                                  core stage tuning:  61%|██████▏   | 49/80 [27:27<20:01, 38.76s/it]core stage tuning:  62%|██████▎   | 50/80 [27:27<18:51, 37.73s/it]                                                                  core stage tuning:  62%|██████▎   | 50/80 [27:56<18:51, 37.73s/it]core stage tuning:  64%|██████▍   | 51/80 [27:56<16:55, 35.01s/it]                                                                  core stage tuning:  64%|██████▍   | 51/80 [28:37<16:55, 35.01s/it]core stage tuning:  65%|██████▌   | 52/80 [28:37<17:12, 36.86s/it]                                                                  core stage tuning:  65%|██████▌   | 52/80 [28:49<17:12, 36.86s/it]core stage tuning:  66%|██████▋   | 53/80 [28:49<13:13, 29.38s/it]                                                                  core stage tuning:  66%|██████▋   | 53/80 [29:03<13:13, 29.38s/it]core stage tuning:  68%|██████▊   | 54/80 [29:03<10:41, 24.68s/it]                                                                  core stage tuning:  68%|██████▊   | 54/80 [29:18<10:41, 24.68s/it]core stage tuning:  69%|██████▉   | 55/80 [29:18<09:08, 21.95s/it]                                                                  core stage tuning:  69%|██████▉   | 55/80 [29:46<09:08, 21.95s/it]core stage tuning:  70%|███████   | 56/80 [29:46<09:31, 23.80s/it]                                                                  core stage tuning:  70%|███████   | 56/80 [30:10<09:31, 23.80s/it]core stage tuning:  71%|███████▏  | 57/80 [30:10<09:08, 23.87s/it]                                                                  core stage tuning:  71%|███████▏  | 57/80 [30:24<09:08, 23.87s/it]core stage tuning:  72%|███████▎  | 58/80 [30:24<07:39, 20.89s/it]                                                                  core stage tuning:  72%|███████▎  | 58/80 [30:46<07:39, 20.89s/it]core stage tuning:  74%|███████▍  | 59/80 [30:46<07:21, 21.00s/it]                                                                  core stage tuning:  74%|███████▍  | 59/80 [31:01<07:21, 21.00s/it]core stage tuning:  75%|███████▌  | 60/80 [31:01<06:26, 19.34s/it]                                                                  core stage tuning:  75%|███████▌  | 60/80 [31:08<06:26, 19.34s/it]core stage tuning:  76%|███████▋  | 61/80 [31:08<04:59, 15.74s/it]                                                                  core stage tuning:  76%|███████▋  | 61/80 [31:42<04:59, 15.74s/it]core stage tuning:  78%|███████▊  | 62/80 [31:42<06:19, 21.06s/it]                                                                  core stage tuning:  78%|███████▊  | 62/80 [31:55<06:19, 21.06s/it]core stage tuning:  79%|███████▉  | 63/80 [31:55<05:17, 18.68s/it]                                                                  core stage tuning:  79%|███████▉  | 63/80 [32:10<05:17, 18.68s/it]core stage tuning:  80%|████████  | 64/80 [32:10<04:40, 17.51s/it]                                                                  core stage tuning:  80%|████████  | 64/80 [32:34<04:40, 17.51s/it]core stage tuning:  81%|████████▏ | 65/80 [32:34<04:51, 19.44s/it]                                                                  core stage tuning:  81%|████████▏ | 65/80 [32:51<04:51, 19.44s/it]core stage tuning:  82%|████████▎ | 66/80 [32:51<04:22, 18.75s/it]                                                                  core stage tuning:  82%|████████▎ | 66/80 [33:02<04:22, 18.75s/it]core stage tuning:  84%|████████▍ | 67/80 [33:02<03:33, 16.39s/it]                                                                  core stage tuning:  84%|████████▍ | 67/80 [33:14<03:33, 16.39s/it]core stage tuning:  85%|████████▌ | 68/80 [33:14<03:00, 15.04s/it]                                                                  core stage tuning:  85%|████████▌ | 68/80 [33:26<03:00, 15.04s/it]core stage tuning:  86%|████████▋ | 69/80 [33:26<02:36, 14.21s/it]                                                                  core stage tuning:  86%|████████▋ | 69/80 [34:36<02:36, 14.21s/it]core stage tuning:  88%|████████▊ | 70/80 [34:36<05:10, 31.06s/it]                                                                  core stage tuning:  88%|████████▊ | 70/80 [34:58<05:10, 31.06s/it]core stage tuning:  89%|████████▉ | 71/80 [34:58<04:15, 28.38s/it]                                                                  core stage tuning:  89%|████████▉ | 71/80 [36:25<04:15, 28.38s/it]core stage tuning:  90%|█████████ | 72/80 [36:25<06:05, 45.75s/it]                                                                  core stage tuning:  90%|█████████ | 72/80 [36:33<06:05, 45.75s/it]core stage tuning:  91%|█████████▏| 73/80 [36:33<04:02, 34.58s/it]                                                                  core stage tuning:  91%|█████████▏| 73/80 [36:45<04:02, 34.58s/it]core stage tuning:  92%|█████████▎| 74/80 [36:45<02:46, 27.73s/it]                                                                  core stage tuning:  92%|█████████▎| 74/80 [36:57<02:46, 27.73s/it]core stage tuning:  94%|█████████▍| 75/80 [36:57<01:54, 22.95s/it]                                                                  core stage tuning:  94%|█████████▍| 75/80 [37:30<01:54, 22.95s/it]core stage tuning:  95%|█████████▌| 76/80 [37:30<01:43, 25.92s/it]                                                                  core stage tuning:  95%|█████████▌| 76/80 [37:44<01:43, 25.92s/it]core stage tuning:  96%|█████████▋| 77/80 [37:44<01:07, 22.48s/it]                                                                  core stage tuning:  96%|█████████▋| 77/80 [38:04<01:07, 22.48s/it]core stage tuning:  98%|█████████▊| 78/80 [38:04<00:43, 21.85s/it]                                                                  core stage tuning:  98%|█████████▊| 78/80 [38:40<00:43, 21.85s/it]core stage tuning:  99%|█████████▉| 79/80 [38:40<00:25, 25.95s/it]                                                                  core stage tuning:  99%|█████████▉| 79/80 [38:50<00:25, 25.95s/it]core stage tuning: 100%|██████████| 80/80 [38:50<00:00, 21.15s/it]core stage tuning: 100%|██████████| 80/80 [38:50<00:00, 29.13s/it]
+
+core stage tuning:   0%|          | 0/80 [00:00<?, ?it/s]
+                                                         
+
+core stage tuning:   0%|          | 0/80 [00:55<?, ?it/s]
+core stage tuning:   1%|▏         | 1/80 [00:55<1:12:33, 55.11s/it]
+                                                                   
+
+core stage tuning:   1%|▏         | 1/80 [01:15<1:12:33, 55.11s/it]
+core stage tuning:   2%|▎         | 2/80 [01:15<45:15, 34.81s/it]  
+                                                                 
+
+core stage tuning:   2%|▎         | 2/80 [01:48<45:15, 34.81s/it]
+core stage tuning:   4%|▍         | 3/80 [01:48<43:25, 33.83s/it]
+                                                                 
+
+core stage tuning:   4%|▍         | 3/80 [02:26<43:25, 33.83s/it]
+core stage tuning:   5%|▌         | 4/80 [02:26<45:05, 35.60s/it]
+                                                                 
+
+core stage tuning:   5%|▌         | 4/80 [02:39<45:05, 35.60s/it]
+core stage tuning:   6%|▋         | 5/80 [02:39<34:17, 27.43s/it]
+                                                                 
+
+core stage tuning:   6%|▋         | 5/80 [03:19<34:17, 27.43s/it]
+core stage tuning:   8%|▊         | 6/80 [03:19<38:56, 31.58s/it]
+                                                                 
+
+core stage tuning:   8%|▊         | 6/80 [03:29<38:56, 31.58s/it]
+core stage tuning:   9%|▉         | 7/80 [03:29<29:48, 24.50s/it]
+                                                                 
+
+core stage tuning:   9%|▉         | 7/80 [03:47<29:48, 24.50s/it]
+core stage tuning:  10%|█         | 8/80 [03:47<26:54, 22.42s/it]
+                                                                 
+
+core stage tuning:  10%|█         | 8/80 [04:06<26:54, 22.42s/it]
+core stage tuning:  11%|█▏        | 9/80 [04:06<25:30, 21.55s/it]
+                                                                 
+
+core stage tuning:  11%|█▏        | 9/80 [04:31<25:30, 21.55s/it]
+core stage tuning:  12%|█▎        | 10/80 [04:31<26:10, 22.44s/it]
+                                                                  
+
+core stage tuning:  12%|█▎        | 10/80 [06:17<26:10, 22.44s/it]
+core stage tuning:  14%|█▍        | 11/80 [06:17<55:23, 48.17s/it]
+                                                                  
+
+core stage tuning:  14%|█▍        | 11/80 [06:43<55:23, 48.17s/it]
+core stage tuning:  15%|█▌        | 12/80 [06:43<46:48, 41.30s/it]
+                                                                  
+
+core stage tuning:  15%|█▌        | 12/80 [07:25<46:48, 41.30s/it]
+core stage tuning:  16%|█▋        | 13/80 [07:25<46:28, 41.62s/it]
+                                                                  
+
+core stage tuning:  16%|█▋        | 13/80 [07:32<46:28, 41.62s/it]
+core stage tuning:  18%|█▊        | 14/80 [07:32<34:05, 30.99s/it]
+                                                                  
+
+core stage tuning:  18%|█▊        | 14/80 [09:23<34:05, 30.99s/it]
+core stage tuning:  19%|█▉        | 15/80 [09:23<59:40, 55.09s/it]
+                                                                  
+
+core stage tuning:  19%|█▉        | 15/80 [09:34<59:40, 55.09s/it]
+core stage tuning:  20%|██        | 16/80 [09:34<44:41, 41.90s/it]
+                                                                  
+
+core stage tuning:  20%|██        | 16/80 [11:25<44:41, 41.90s/it]
+core stage tuning:  21%|██▏       | 17/80 [11:25<1:05:49, 62.70s/it]
+                                                                    
+
+core stage tuning:  21%|██▏       | 17/80 [11:38<1:05:49, 62.70s/it]
+core stage tuning:  22%|██▎       | 18/80 [11:38<49:28, 47.88s/it]  
+                                                                  
+
+core stage tuning:  22%|██▎       | 18/80 [11:50<49:28, 47.88s/it]
+core stage tuning:  24%|██▍       | 19/80 [11:50<37:32, 36.93s/it]
+                                                                  
+
+core stage tuning:  24%|██▍       | 19/80 [13:08<37:32, 36.93s/it]
+core stage tuning:  25%|██▌       | 20/80 [13:08<49:23, 49.39s/it]
+                                                                  
+
+core stage tuning:  25%|██▌       | 20/80 [13:16<49:23, 49.39s/it]
+core stage tuning:  26%|██▋       | 21/80 [13:16<36:27, 37.07s/it]
+                                                                  
+
+core stage tuning:  26%|██▋       | 21/80 [13:55<36:27, 37.07s/it]
+core stage tuning:  28%|██▊       | 22/80 [13:55<36:10, 37.42s/it]
+                                                                  
+
+core stage tuning:  28%|██▊       | 22/80 [15:28<36:10, 37.42s/it]
+core stage tuning:  29%|██▉       | 23/80 [15:28<51:32, 54.26s/it]
+                                                                  
+
+core stage tuning:  29%|██▉       | 23/80 [16:23<51:32, 54.26s/it]
+core stage tuning:  30%|███       | 24/80 [16:23<50:44, 54.37s/it]
+                                                                  
+
+core stage tuning:  30%|███       | 24/80 [17:00<50:44, 54.37s/it]
+core stage tuning:  31%|███▏      | 25/80 [17:00<45:02, 49.14s/it]
+                                                                  
+
+core stage tuning:  31%|███▏      | 25/80 [17:17<45:02, 49.14s/it]
+core stage tuning:  32%|███▎      | 26/80 [17:17<35:37, 39.59s/it]
+                                                                  
+
+core stage tuning:  32%|███▎      | 26/80 [17:33<35:37, 39.59s/it]
+core stage tuning:  34%|███▍      | 27/80 [17:33<28:36, 32.38s/it]
+                                                                  
+
+core stage tuning:  34%|███▍      | 27/80 [17:47<28:36, 32.38s/it]
+core stage tuning:  35%|███▌      | 28/80 [17:47<23:24, 27.01s/it]
+                                                                  
+
+core stage tuning:  35%|███▌      | 28/80 [18:14<23:24, 27.01s/it]
+core stage tuning:  36%|███▋      | 29/80 [18:14<23:01, 27.09s/it]
+                                                                  
+
+core stage tuning:  36%|███▋      | 29/80 [18:36<23:01, 27.09s/it]
+core stage tuning:  38%|███▊      | 30/80 [18:36<21:16, 25.53s/it]
+                                                                  
+
+core stage tuning:  38%|███▊      | 30/80 [18:56<21:16, 25.53s/it]
+core stage tuning:  39%|███▉      | 31/80 [18:56<19:26, 23.80s/it]
+                                                                  
+
+core stage tuning:  39%|███▉      | 31/80 [19:28<19:26, 23.80s/it]
+core stage tuning:  40%|████      | 32/80 [19:28<21:01, 26.28s/it]
+                                                                  
+
+core stage tuning:  40%|████      | 32/80 [19:44<21:01, 26.28s/it]
+core stage tuning:  41%|████▏     | 33/80 [19:44<18:05, 23.09s/it]
+                                                                  
+
+core stage tuning:  41%|████▏     | 33/80 [20:04<18:05, 23.09s/it]
+core stage tuning:  42%|████▎     | 34/80 [20:04<17:04, 22.28s/it]
+                                                                  
+
+core stage tuning:  42%|████▎     | 34/80 [20:26<17:04, 22.28s/it]
+core stage tuning:  44%|████▍     | 35/80 [20:26<16:37, 22.16s/it]
+                                                                  
+
+core stage tuning:  44%|████▍     | 35/80 [20:52<16:37, 22.16s/it]
+core stage tuning:  45%|████▌     | 36/80 [20:52<17:04, 23.28s/it]
+                                                                  
+
+core stage tuning:  45%|████▌     | 36/80 [21:12<17:04, 23.28s/it]
+core stage tuning:  46%|████▋     | 37/80 [21:12<16:05, 22.45s/it]
+                                                                  
+
+core stage tuning:  46%|████▋     | 37/80 [21:25<16:05, 22.45s/it]
+core stage tuning:  48%|████▊     | 38/80 [21:25<13:41, 19.57s/it]
+                                                                  
+
+core stage tuning:  48%|████▊     | 38/80 [21:31<13:41, 19.57s/it]
+core stage tuning:  49%|████▉     | 39/80 [21:31<10:27, 15.31s/it]
+                                                                  
+
+core stage tuning:  49%|████▉     | 39/80 [21:49<10:27, 15.31s/it]
+core stage tuning:  50%|█████     | 40/80 [21:49<10:44, 16.12s/it]
+                                                                  
+
+core stage tuning:  50%|█████     | 40/80 [21:58<10:44, 16.12s/it]
+core stage tuning:  51%|█████▏    | 41/80 [21:58<09:05, 13.99s/it]
+                                                                  
+
+core stage tuning:  51%|█████▏    | 41/80 [22:34<09:05, 13.99s/it]
+core stage tuning:  52%|█████▎    | 42/80 [22:34<13:08, 20.75s/it]
+                                                                  
+
+core stage tuning:  52%|█████▎    | 42/80 [22:44<13:08, 20.75s/it]
+core stage tuning:  54%|█████▍    | 43/80 [22:44<10:42, 17.37s/it]
+                                                                  
+
+core stage tuning:  54%|█████▍    | 43/80 [22:54<10:42, 17.37s/it]
+core stage tuning:  55%|█████▌    | 44/80 [22:54<09:13, 15.39s/it]
+                                                                  
+
+core stage tuning:  55%|█████▌    | 44/80 [23:08<09:13, 15.39s/it]
+core stage tuning:  56%|█████▋    | 45/80 [23:08<08:33, 14.68s/it]
+                                                                  
+
+core stage tuning:  56%|█████▋    | 45/80 [24:07<08:33, 14.68s/it]
+core stage tuning:  57%|█████▊    | 46/80 [24:07<16:01, 28.27s/it]
+                                                                  
+
+core stage tuning:  57%|█████▊    | 46/80 [25:53<16:01, 28.27s/it]
+core stage tuning:  59%|█████▉    | 47/80 [25:53<28:18, 51.46s/it]
+                                                                  
+
+core stage tuning:  59%|█████▉    | 47/80 [26:39<28:18, 51.46s/it]
+core stage tuning:  60%|██████    | 48/80 [26:39<26:29, 49.68s/it]
+                                                                  
+
+core stage tuning:  60%|██████    | 48/80 [26:52<26:29, 49.68s/it]
+core stage tuning:  61%|██████▏   | 49/80 [26:52<20:01, 38.76s/it]
+                                                                  
+
+core stage tuning:  61%|██████▏   | 49/80 [27:27<20:01, 38.76s/it]
+core stage tuning:  62%|██████▎   | 50/80 [27:27<18:51, 37.73s/it]
+                                                                  
+
+core stage tuning:  62%|██████▎   | 50/80 [27:56<18:51, 37.73s/it]
+core stage tuning:  64%|██████▍   | 51/80 [27:56<16:55, 35.01s/it]
+                                                                  
+
+core stage tuning:  64%|██████▍   | 51/80 [28:37<16:55, 35.01s/it]
+core stage tuning:  65%|██████▌   | 52/80 [28:37<17:12, 36.86s/it]
+                                                                  
+
+core stage tuning:  65%|██████▌   | 52/80 [28:49<17:12, 36.86s/it]
+core stage tuning:  66%|██████▋   | 53/80 [28:49<13:13, 29.38s/it]
+                                                                  
+
+core stage tuning:  66%|██████▋   | 53/80 [29:03<13:13, 29.38s/it]
+core stage tuning:  68%|██████▊   | 54/80 [29:03<10:41, 24.68s/it]
+                                                                  
+
+core stage tuning:  68%|██████▊   | 54/80 [29:18<10:41, 24.68s/it]
+core stage tuning:  69%|██████▉   | 55/80 [29:18<09:08, 21.95s/it]
+                                                                  
+
+core stage tuning:  69%|██████▉   | 55/80 [29:46<09:08, 21.95s/it]
+core stage tuning:  70%|███████   | 56/80 [29:46<09:31, 23.80s/it]
+                                                                  
+
+core stage tuning:  70%|███████   | 56/80 [30:10<09:31, 23.80s/it]
+core stage tuning:  71%|███████▏  | 57/80 [30:10<09:08, 23.87s/it]
+                                                                  
+
+core stage tuning:  71%|███████▏  | 57/80 [30:24<09:08, 23.87s/it]
+core stage tuning:  72%|███████▎  | 58/80 [30:24<07:39, 20.89s/it]
+                                                                  
+
+core stage tuning:  72%|███████▎  | 58/80 [30:46<07:39, 20.89s/it]
+core stage tuning:  74%|███████▍  | 59/80 [30:46<07:21, 21.00s/it]
+                                                                  
+
+core stage tuning:  74%|███████▍  | 59/80 [31:01<07:21, 21.00s/it]
+core stage tuning:  75%|███████▌  | 60/80 [31:01<06:26, 19.34s/it]
+                                                                  
+
+core stage tuning:  75%|███████▌  | 60/80 [31:08<06:26, 19.34s/it]
+core stage tuning:  76%|███████▋  | 61/80 [31:08<04:59, 15.74s/it]
+                                                                  
+
+core stage tuning:  76%|███████▋  | 61/80 [31:42<04:59, 15.74s/it]
+core stage tuning:  78%|███████▊  | 62/80 [31:42<06:19, 21.06s/it]
+                                                                  
+
+core stage tuning:  78%|███████▊  | 62/80 [31:55<06:19, 21.06s/it]
+core stage tuning:  79%|███████▉  | 63/80 [31:55<05:17, 18.68s/it]
+                                                                  
+
+core stage tuning:  79%|███████▉  | 63/80 [32:10<05:17, 18.68s/it]
+core stage tuning:  80%|████████  | 64/80 [32:10<04:40, 17.51s/it]
+                                                                  
+
+core stage tuning:  80%|████████  | 64/80 [32:34<04:40, 17.51s/it]
+core stage tuning:  81%|████████▏ | 65/80 [32:34<04:51, 19.44s/it]
+                                                                  
+
+core stage tuning:  81%|████████▏ | 65/80 [32:51<04:51, 19.44s/it]
+core stage tuning:  82%|████████▎ | 66/80 [32:51<04:22, 18.75s/it]
+                                                                  
+
+core stage tuning:  82%|████████▎ | 66/80 [33:02<04:22, 18.75s/it]
+core stage tuning:  84%|████████▍ | 67/80 [33:02<03:33, 16.39s/it]
+                                                                  
+
+core stage tuning:  84%|████████▍ | 67/80 [33:14<03:33, 16.39s/it]
+core stage tuning:  85%|████████▌ | 68/80 [33:14<03:00, 15.04s/it]
+                                                                  
+
+core stage tuning:  85%|████████▌ | 68/80 [33:26<03:00, 15.04s/it]
+core stage tuning:  86%|████████▋ | 69/80 [33:26<02:36, 14.21s/it]
+                                                                  
+
+core stage tuning:  86%|████████▋ | 69/80 [34:36<02:36, 14.21s/it]
+core stage tuning:  88%|████████▊ | 70/80 [34:36<05:10, 31.06s/it]
+                                                                  
+
+core stage tuning:  88%|████████▊ | 70/80 [34:58<05:10, 31.06s/it]
+core stage tuning:  89%|████████▉ | 71/80 [34:58<04:15, 28.38s/it]
+                                                                  
+
+core stage tuning:  89%|████████▉ | 71/80 [36:25<04:15, 28.38s/it]
+core stage tuning:  90%|█████████ | 72/80 [36:25<06:05, 45.75s/it]
+                                                                  
+
+core stage tuning:  90%|█████████ | 72/80 [36:33<06:05, 45.75s/it]
+core stage tuning:  91%|█████████▏| 73/80 [36:33<04:02, 34.58s/it]
+                                                                  
+
+core stage tuning:  91%|█████████▏| 73/80 [36:45<04:02, 34.58s/it]
+core stage tuning:  92%|█████████▎| 74/80 [36:45<02:46, 27.73s/it]
+                                                                  
+
+core stage tuning:  92%|█████████▎| 74/80 [36:57<02:46, 27.73s/it]
+core stage tuning:  94%|█████████▍| 75/80 [36:57<01:54, 22.95s/it]
+                                                                  
+
+core stage tuning:  94%|█████████▍| 75/80 [37:30<01:54, 22.95s/it]
+core stage tuning:  95%|█████████▌| 76/80 [37:30<01:43, 25.92s/it]
+                                                                  
+
+core stage tuning:  95%|█████████▌| 76/80 [37:44<01:43, 25.92s/it]
+core stage tuning:  96%|█████████▋| 77/80 [37:44<01:07, 22.48s/it]
+                                                                  
+
+core stage tuning:  96%|█████████▋| 77/80 [38:04<01:07, 22.48s/it]
+core stage tuning:  98%|█████████▊| 78/80 [38:04<00:43, 21.85s/it]
+                                                                  
+
+core stage tuning:  98%|█████████▊| 78/80 [38:40<00:43, 21.85s/it]
+core stage tuning:  99%|█████████▉| 79/80 [38:40<00:25, 25.95s/it]
+                                                                  
+
+core stage tuning:  99%|█████████▉| 79/80 [38:50<00:25, 25.95s/it]
+core stage tuning: 100%|██████████| 80/80 [38:50<00:00, 21.15s/it]
+core stage tuning: 100%|██████████| 80/80 [38:50<00:00, 29.13s/it]
 config0 | Val RMSE: 0.9021 | best: 0.9021 | time: 0.92min
 config1 | Val RMSE: 0.9079 | best: 0.9021 | time: 0.34min
 config2 | Val RMSE: 0.9017 | best: 0.9017 | time: 0.54min

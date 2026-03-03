@@ -12,7 +12,7 @@ from data.preprocess_bundle import load_graph_bundle_data
 from models.graph_bundle_rec import MultiModalGraphBundleRec
 
 
-# 设置随机种子
+# Set random seed
 def set_seed(seed=42):
     torch.manual_seed(seed)
     if torch.cuda.is_available():
@@ -20,12 +20,12 @@ def set_seed(seed=42):
         torch.cuda.manual_seed_all(seed)
 
 
-# 验证函数（计算验证集/测试集RMSE）
+# Validation function (calculates the RMSE of the validation set/test set)
 def evaluate_model(model, pairs, ratings, movie_feats, batch_size, device, criterion):
-    model.eval()  # 评估模式（禁用Dropout/BatchNorm）
+    model.eval()  # Evaluation mode (with Dropout/BatchNorm disabled)
     total_loss = 0.0
     num_batches = len(ratings) // batch_size
-    with torch.no_grad():  # 禁用梯度，加速评估
+    with torch.no_grad():  # Disable gradients to speed up evaluation
         for i in range(num_batches):
             start = i * batch_size
             end = start + batch_size
@@ -39,18 +39,18 @@ def evaluate_model(model, pairs, ratings, movie_feats, batch_size, device, crite
 
     avg_loss = total_loss / num_batches
     avg_rmse = torch.sqrt(torch.tensor(avg_loss)).item()
-    model.train()  # 回到训练模式
+    model.train()  # Return to training mode
     return avg_rmse
 
 
 def train_single(config_path, test_mode=False):
-    # 1. 加载配置
+    # 1. Load configuration
     with open(config_path, "r") as f:
         config = yaml.safe_load(f)
     device = torch.device(config["train"]["device"] if torch.cuda.is_available() else "cpu")
     set_seed(config["train"]["seed"])
 
-    # 测试模式参数
+    # Test mode parameters
     if test_mode:
         print("===== Bundle Model Testing Mode (Short Training)=====")
         config["train"]["epochs"] = config["train"]["test_epochs"]
@@ -60,10 +60,10 @@ def train_single(config_path, test_mode=False):
     print(f"device：{device} | modals：{config['data']['modals']}")
     print(f"epochs：{config['train']['epochs']} | batch_size：{config['train']['batch_size']}")
 
-    # 2. 加载数据（包含训练/验证/测试集）
+    # 2. Load data (including training/validation/test sets)
     data_dict = load_graph_bundle_data(config["data"])
 
-    # 3. 数据移到设备
+    # 3. Data moved to device
     movie_feats = {k: v.to(device) for k, v in data_dict["movie_feats"].items()}
     train_pairs = data_dict["train_pairs"].to(device)
     train_ratings = data_dict["train_ratings"].to(device)
@@ -72,7 +72,7 @@ def train_single(config_path, test_mode=False):
     test_pairs = data_dict["test_pairs"].to(device)
     test_ratings = data_dict["test_ratings"].to(device)
 
-    # 4. 强制转换数值参数
+    # 4. Force conversion of numerical parameters
     train_config = config["train"]
     model_config = config["model"]
     train_config["lr"] = float(train_config["lr"])
@@ -84,7 +84,7 @@ def train_single(config_path, test_mode=False):
     model_config["edge_stalk_dim"] = int(model_config["edge_stalk_dim"])
     model_config["num_diffusion_layers"] = int(model_config["num_diffusion_layers"])
 
-    # 5. 初始化模型
+    # 5. Initialize the model
     model_config_dict = {
         "num_users": data_dict["num_users"],
         "num_movies": data_dict["num_movies"],
@@ -97,7 +97,7 @@ def train_single(config_path, test_mode=False):
     }
     model = MultiModalGraphBundleRec(model_config_dict, device=device).to(device)
 
-    # 6. 优化器与损失函数
+    # 6. Optimizer and Loss Function
     optimizer = torch.optim.Adam(
         model.parameters(),
         lr=train_config["lr"],
@@ -105,21 +105,21 @@ def train_single(config_path, test_mode=False):
     )
     criterion = nn.MSELoss()
 
-    # 7. 早停配置（核心：验证集RMSE连续上升则停止）
+    # 7. Early stop configuration (core: stop if the validation set RMSE continues to rise).
     best_val_rmse = float('inf')
-    patience = 5  # 连续5轮验证集RMSE不下降则早停
+    patience = 5  # If the RMSE does not decrease after 5 consecutive rounds of validation, stop early.
     patience_counter = 0
     best_model_state = None
 
-    # 8. 训练循环（带验证+早停）
+    # 8. Training loop (with validation + early stop)
     model.train()
     for epoch in range(train_config["epochs"]):
         epoch_loss = 0.0
-        # 随机打乱训练集
+        # Randomly shuffle the training set
         perm = torch.randperm(len(train_ratings))
         num_batches = len(train_ratings) // train_config["batch_size"]
 
-        # 训练批次
+        # Training batch
         with tqdm(total=num_batches, desc=f"Epoch [{epoch + 1}/{train_config['epochs']}]") as pbar:
             for i in range(num_batches):
                 start = i * train_config["batch_size"]
@@ -139,24 +139,24 @@ def train_single(config_path, test_mode=False):
                 pbar.update(1)
                 pbar.set_postfix({"Train Loss": loss.item(), "Train RMSE": torch.sqrt(loss).item()})
 
-        # 计算本轮训练集RMSE
+        # Calculate the RMSE of the training set in this round.
         train_rmse = torch.sqrt(torch.tensor(epoch_loss / num_batches)).item()
 
-        # 计算本轮验证集RMSE（核心：验证环节）
+        # Calculate the RMSE of the validation set in this round (core: validation phase).
         val_rmse = evaluate_model(
             model, val_pairs, val_ratings, movie_feats,
             train_config["batch_size"], device, criterion
         )
 
-        # 打印本轮结果
+        # Print the results of this round
         print(f"\nEpoch [{epoch + 1}] Summary:")
         print(f"Train RMSE: {train_rmse:.4f} | Val RMSE: {val_rmse:.4f}")
 
-        # 早停逻辑
+        # Early Stop Logic
         if val_rmse < best_val_rmse:
             best_val_rmse = val_rmse
             patience_counter = 0
-            # 保存最优模型（验证集效果最好的模型）
+            # Save the optimal model (the model that performs best on the validation set).
             best_model_state = model.state_dict()
             os.makedirs("checkpoints", exist_ok=True)
             torch.save({
@@ -172,9 +172,9 @@ def train_single(config_path, test_mode=False):
                 print(f"🛑 Early stop triggering! Optimal validation set RMSE：{best_val_rmse:.4f}")
                 break
 
-    # 9. 最终评估（用最优模型测试测试集）
+    # 9. Final evaluation (testing the test set with the optimal model)
     print("\n===== Final Test Set Evaluation =====")
-    # 加载最优模型
+    # Loading the optimal model
     model.load_state_dict(best_model_state)
     test_rmse = evaluate_model(
         model, test_pairs, test_ratings, movie_feats,
@@ -182,7 +182,7 @@ def train_single(config_path, test_mode=False):
     )
     print(f"Best Val RMSE: {best_val_rmse:.4f} | Test RMSE: {test_rmse:.4f}")
 
-    # 保存最终结果
+    # Save the final result
     with open("experiment_results/final_evaluation.txt", "w") as f:
         f.write(f"Best Validation RMSE: {best_val_rmse:.4f}\n")
         f.write(f"Test RMSE: {test_rmse:.4f}\n")

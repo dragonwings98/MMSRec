@@ -1,26 +1,41 @@
-图束模型全自动调优 - 最终最优配置
-=====================================
-调优完成时间：2026-02-24 11:18:37
-最终最优验证集RMSE：
-=====================================
-【核心参数】
+Fully Automated Tuning of Stalk Model - Final Optimal Configuration
+
+====================================== Tuning Completion Time: 2026-02-24 11:18:37
+Final Optimal Validation Set RMSE:
+
+======================================
+【Core Parameters】
+
 lr: 0.0003
+
 node_stalk_dim: 256
+
 fusion_type: concat
+
 batch_size: 256
 
-【次要参数】
+【Secondary Parameters】
+
 edge_stalk_dim: 32
+
 num_diffusion_layers: 1
+
 weight_decay: 1e-05
+
 dropout_rate: 0.1
 
-【其他参数】
+【Other Parameters】
+
 modals: ["text", "video"]
+
 epochs: 30
-=====================================
-各阶段结果文件：
-- 核心层：experiment_results/best_config_core.txt
-- 次要层：experiment_results/best_config_secondary.txt
-- 微调层：experiment_results/best_config_fine.txt
-- 超参影响分析图：experiment_results/hyperparam_impact_*.png
+
+======================================== Result files for each stage:
+
+- Core layer: experiment_results/best_config_core.txt
+
+- Secondary layer: experiment_results/best_config_secondary.txt
+
+- Fine-tuning layer: experiment_results/best_config_fine.txt
+
+- Hyperparameter impact analysis diagram: experiment_results/hyperparam_impact_*.png
